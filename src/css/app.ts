@@ -29,7 +29,10 @@ export const Wrapper = styled.div`
 `;
 
 export const Calculator = styled.div`
-  width: 400px;
+  width: 100%;
+  @media (min-width: 1100px) {
+    max-width: 400px;
+  }
   
   border-radius: 15px;
   display: flex;
@@ -40,6 +43,7 @@ export const Calculator = styled.div`
 
 export const CalcValue = styled.div`
   width: 100%;
+  min-height: 36px;
   padding: 5px;
   font-size: 22px;
   color: #fff;
@@ -59,8 +63,9 @@ export const CalcValue = styled.div`
 export const ComponentsCalc = styled.div`
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(4, 100px);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-areas: "soma subtracao divisao multiplicacao";
+  
 
   button:nth-child(0){
     grid-area: soma;
@@ -101,7 +106,8 @@ export const NumbersCalc = styled.div`
 
 export const Numbers = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 90px);
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
 `;
 
 export const ButtonsNumber = styled(Button)`

@@ -9,42 +9,29 @@ function App() {
 
   const [infoScreen, setInfoScreen] = useState('');
 
-  const [operator, setOperator] = useState('');
-  const [calc, setCalc] = useState<number>();
+  function addValue(value: string) {
+    setInfoScreen(infoScreen + value);
+  }
 
-  function addOperator(op: string){
-    setOperator(op);
+  function reset() {
     setInfoScreen('');
   }
 
-  function addNumbersAndOperator(info: string){
-    setInfoScreen(infoScreen + info);
-  }
+  function calc(){
+    try {
+      if(infoScreen === 'Error') {
+        reset();
+        return;
+      }
 
-  function result(){
-    console.log(infoScreen);
-    const number = parseFloat(parseFloat(infoScreen).toFixed(2));
-    calculator(operator, number);
-    setInfoScreen(String(calc));
-  }
 
-  function calculator(op: string, number: number){
-    switch(op){
-      case '+':
-        setCalc(calc + number);
-        break;
-      case '-':
-        setCalc(calc - number);
-        break;
-      case '*':
-        setCalc(calc * number);
-        break;
-      case '/':
-        setCalc(calc / number);
-        break;
+      const result = eval(infoScreen);
+      setInfoScreen(result);      
+    } catch (error) {
+      setInfoScreen('Error');
     }
   }
-  
+
   
   return (
     <Container>
@@ -52,27 +39,27 @@ function App() {
         <Calculator>
           <CalcValue><span>{infoScreen}</span></CalcValue>
           <ComponentsCalc>
-            <Button onClick={() => addOperator('+')}>+</Button>
-            <Button onClick={() => addOperator('-')}>-</Button>
-            <Button onClick={() => addOperator('/')}>/</Button>
-            <Button onClick={() => addOperator('*')}>*</Button>
+            <Button onClick={() => addValue('+')}>+</Button>
+            <Button onClick={() => addValue('-')}>-</Button>
+            <Button onClick={() => addValue('/')}>/</Button>
+            <Button onClick={() => addValue('*')}>*</Button>
           </ComponentsCalc>
           <NumbersCalc>
             <Numbers>
-              <ButtonsNumber onClick={() => addNumbersAndOperator('9')}>9</ButtonsNumber>
-              <ButtonsNumber onClick={() => addNumbersAndOperator('8')}>8</ButtonsNumber>
-              <ButtonsNumber onClick={() => addNumbersAndOperator('7')}>7</ButtonsNumber>
-              <ButtonsNumber onClick={() => addNumbersAndOperator('6')}>6</ButtonsNumber>
-              <ButtonsNumber onClick={() => addNumbersAndOperator('5')}>5</ButtonsNumber>
-              <ButtonsNumber onClick={() => addNumbersAndOperator('4')}>4</ButtonsNumber>
-              <ButtonsNumber onClick={() => addNumbersAndOperator('3')}>3</ButtonsNumber>
-              <ButtonsNumber onClick={() => addNumbersAndOperator('2')}>2</ButtonsNumber>
-              <ButtonsNumber onClick={() => addNumbersAndOperator('1')}>1</ButtonsNumber>
-              <ButtonsNumber onClick={() => addNumbersAndOperator('0')}>0</ButtonsNumber>
-              <ButtonsNumber onClick={() => addNumbersAndOperator('.')}>.</ButtonsNumber>
-              <ButtonsNumber>C</ButtonsNumber>
+              <ButtonsNumber onClick={() => addValue('9')}>9</ButtonsNumber>
+              <ButtonsNumber onClick={() => addValue('8')}>8</ButtonsNumber>
+              <ButtonsNumber onClick={() => addValue('7')}>7</ButtonsNumber>
+              <ButtonsNumber onClick={() => addValue('6')}>6</ButtonsNumber>
+              <ButtonsNumber onClick={() => addValue('5')}>5</ButtonsNumber>
+              <ButtonsNumber onClick={() => addValue('4')}>4</ButtonsNumber>
+              <ButtonsNumber onClick={() => addValue('3')}>3</ButtonsNumber>
+              <ButtonsNumber onClick={() => addValue('2')}>2</ButtonsNumber>
+              <ButtonsNumber onClick={() => addValue('1')}>1</ButtonsNumber>
+              <ButtonsNumber onClick={() => addValue('0')}>0</ButtonsNumber>
+              <ButtonsNumber onClick={() => addValue('.')}>.</ButtonsNumber>
+              <ButtonsNumber onClick={reset}>C</ButtonsNumber>
             </Numbers>
-            <ButtonEqual onClick={result}>=</ButtonEqual>
+            <ButtonEqual onClick={calc}>=</ButtonEqual>
           </NumbersCalc>
         </Calculator>
       </Wrapper>
