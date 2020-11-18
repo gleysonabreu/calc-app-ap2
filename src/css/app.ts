@@ -21,6 +21,13 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+
+  h1{
+    font: Arial;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
 
   @media (min-width: 1100px) {
     max-width: 800px;

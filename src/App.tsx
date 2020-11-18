@@ -36,6 +36,7 @@ function App() {
   return (
     <Container>
       <Wrapper>
+        <h1>Calculadora</h1>
         <Calculator>
           <CalcValue><span>{infoScreen}</span></CalcValue>
           <ComponentsCalc>
